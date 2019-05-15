@@ -1,17 +1,46 @@
+# Example of non nested query
 query posts{
   posts{
     ...Post
   }
 }
 
-query contents{
-  posts{
-    ...Post
+# Example of nested query
+query contents {
+  content {
+    ...PostDeepNesting
   }
 }
 
+# All different fragments
 fragment Post on Post {
   id
   published
   title
+}
+
+fragment PostDeepNesting on Post {
+  id
+  user {
+    ...UserDeepNesting
+  }
+  published
+  title
+  content {
+    ...ContentDeepNesting
+  }
+}
+
+fragment UserDeepNesting on User {
+  id
+  name
+  email
+  password
+  posts {
+    ...PostDeepNesting
+  }
+}
+
+fragment ContentDeepNesting on Content {
+  data
 }

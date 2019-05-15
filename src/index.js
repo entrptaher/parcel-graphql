@@ -1,10 +1,17 @@
-import query from './query.graphql'
-console.log(query)
-
+import query from "./query.graphql";
 import gql from "graphql-tag";
-console.log(gql`query posts{ posts { id }}`)
-
 import { print } from "graphql/language/printer";
-console.log(print(query))
+import filterUnusedFragments from "./utils/graphql/filter-unused-fragments";
 
+const printObj = gqlObj => console.log(print(gqlObj));
+const printStr = gqlStr =>
+  console.log(
+    gql`
+      ${gqlStr}
+    `
+  );
 
+console.log(query);
+printStr(`query posts{ posts { id }}`);
+printObj(query);
+printObj(filterUnusedFragments(query, "posts"));
