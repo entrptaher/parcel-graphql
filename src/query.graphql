@@ -1,0 +1,17 @@
+query posts{
+  posts{
+    ...Post
+  }
+}
+
+query contents{
+  posts{
+    ...Post
+  }
+}
+
+fragment Post on Post {
+  id
+  published
+  title
+}
